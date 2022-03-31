@@ -21,6 +21,7 @@ class Server:
 
     def accept_connection(self):
         connection, client_address = self.sock.accept()
+        print(f"accepting connection from {client_address}")
         self.receive_data(connection)
         connection.close()
 
