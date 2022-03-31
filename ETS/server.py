@@ -5,14 +5,15 @@ import logging
 class Server:
     def __init__(self, ip, port):
         self.sock = None
+        self.ip = ip
+        self.port = port
 
     def create_socket(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.settimeout(10)
-        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR)
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-        self.sock.bind(self.ip, self.port)
-        logging.info(f"starting up on {self.ip}:{self.port}")
+        self.sock.bind((self.ip, self.port))
+        print(f"starting up on {self.ip}:{self.port}")
         self.sock.listen(1)
 
     def close_socket(self):
@@ -39,10 +40,14 @@ if __name__ == '__main__':
     server = Server(ip='0.0.0.0', port=10000)
     try:
         server.create_socket()
-    except Exception as e:
-        logging.log(f"ERROR: {str(e)}")
+        while True:
+            server.accept_connection()
+    except KeyboardInterrupt:
+        logging.warning("Control-C: Program berhenti")
+        exit(0)
+    except Exception as ee:
+        print("ERROR")
+        print(ee)
+        logging.info(f"ERROR: {str(ee)}")
     finally:
         server.close_socket()
-
-    while True:
-        server.accept_connection()
