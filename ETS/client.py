@@ -3,6 +3,7 @@ import logging
 import threading
 import ssl
 import os
+import random
 
 
 class Request:
@@ -52,7 +53,7 @@ class Request:
         while amount_received < amount_expected:
             data = self.sock.recv(16)
             amount_received += len(self.data)
-            print(f"{data}")
+            print(f"response : {data}")
             logging.info(f"{data}")
 
     def send_with_thread(self):
@@ -63,27 +64,21 @@ class Request:
         self.thread.join()
 
 
-try:
-    request1 = Request(
+def send_random_request():
+    id_pemain = random.randint(1, 10)
+    request = Request(
         ip='172.16.16.101',
         port=10000,
-        data="getdatapemain 1\r\n\r\n",
-        secure=True
+        data=f"getdatapemain {id_pemain}\r\n\r\n"
     )
-    request2 = Request(
-        ip='172.16.16.101',
-        port=10000,
-        data="getdatapemain 2\r\n\r\n",
-        secure=True
-    )
-    request3 = Request(
-        ip='172.16.16.101',
-        port=10000,
-        data="getdatapemain 3\r\n\r\n",
-        secure=True
-    )
+    request.send()
 
-    request1.send_with_thread()
+
+try:
+    send_random_request()
+    send_random_request()
+    send_random_request()
+
     print("done")
 
 except Exception as ee:
