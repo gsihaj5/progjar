@@ -39,9 +39,9 @@ class Request:
 
     def send(self):
         if(self.secure):
-            self.make_socket()
-        else:
             self.make_secure_socket()
+        else:
+            self.make_socket()
         print(f"sending {self.data}")
         self.sock.sendall(self.data.encode())
         self.handle_response()
