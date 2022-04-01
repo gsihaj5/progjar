@@ -10,6 +10,10 @@ alldata['1'] = dict(nomor=1, nama="dean henderson", posisi="kiper")
 alldata['2'] = dict(nomor=2, nama="luke shaw", posisi="bek kiri")
 alldata['3'] = dict(nomor=3, nama="aaron wan-bissaka", posisi="bek kanan")
 alldata['4'] = dict(nomor=4, nama="victor lindelof", posisi="bek tengah kanan")
+alldata['5'] = dict(nomor=5, nama="pemain 5", posisi="pos 5")
+alldata['6'] = dict(nomor=6, nama="pemain 6", posisi="pos 6")
+alldata['7'] = dict(nomor=7, nama="pemain 7", posisi="pos 7")
+alldata['8'] = dict(nomor=8, nama="pemain 8", posisi="pos 8")
 
 
 def versi():
@@ -120,14 +124,19 @@ def handle_request(server_address, connection):
                 break
 
         else:
-            logging.warning(f"no more data from {client_address}")
             break
     print("handling request done")
 
 
 if __name__ == '__main__':
+    secure = True
+
+    if(secure):
+        print("running ssl multi thread server")
+    else:
+        print("running no-ssl multi thread server")
     try:
-        run_server(('0.0.0.0', 10000), is_secure=False)
+        run_server(('0.0.0.0', 10000), is_secure=secure)
     except KeyboardInterrupt:
         logging.warning("Control-C: Program berhenti")
         exit(0)

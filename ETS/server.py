@@ -103,6 +103,7 @@ class Server:
 
 if __name__ == '__main__':
     server = Server(ip='0.0.0.0', port=10000)
+    print("running server no-ssl single_thread server")
     try:
         server.create_socket()
         while True:
