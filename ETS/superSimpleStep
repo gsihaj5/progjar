@@ -1,0 +1,7 @@
+1 copy client
+2 bikin thread di client
+3 copy server 2 kali
+4 server_single_thread, server_multi_thread
+5 server_single_thread -> ganti secure jadi False
+6 server_multi_thread -> nambah thread
+

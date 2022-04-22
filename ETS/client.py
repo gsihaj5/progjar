@@ -80,7 +80,7 @@ def send_random_request(secure):
 
 try:
     thread_count = 20
-    secure = True
+    secure = False
     response_count = 0
 
     if(secure):
@@ -114,5 +114,3 @@ try:
 except Exception as ee:
     logging.info(f"ERROR: {str(ee)}")
     exit(0)
-finally:
-    logging.info("closing")
