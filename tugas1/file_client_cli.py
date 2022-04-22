@@ -66,7 +66,18 @@ def remote_get(filename=""):
         return False
 
 
+def remote_put(filename=""):
+    command_str = f"PUT {filename}"
+    hasil = send_command(command_str)
+    if (hasil['status'] == 'OK'):
+        return True
+    else:
+        print("Gagal")
+        return False
+
+
 if __name__ == '__main__':
     server_address = ('172.16.16.101', 6666)
-    remote_list()
-    remote_get('donalbebek.jpg')
+    # remote_list()
+    # remote_get('donalbebek.jpg')
+    remote_put('donalbebekcpy.jpg')

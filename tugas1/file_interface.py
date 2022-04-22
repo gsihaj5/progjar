@@ -26,6 +26,16 @@ class FileInterface:
         except Exception as e:
             return dict(status='ERROR', data=str(e))
 
+    def put(self, params=[]):
+        try:
+            filename = params[0]
+            if (filename == ''):
+                return None
+            os.remove(f"{filename}")
+            return dict(status='OK')
+        except Exception as e:
+            return dict(status='ERROR', data=str(e))
+
 
 if __name__ == '__main__':
     f = FileInterface()

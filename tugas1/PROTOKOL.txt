@@ -42,8 +42,7 @@ GET
 POST
 * TUJUAN: untuk upload file 
 * PARAMETER:
-  - PARAMETER1 : nama file
-  - PARAMETER2 : file yang ingin di upload (dalam bentuk base 64)
+  - PARAMETER1 : path file yang akan di upload
 * RESULT:
 - BERHASIL:
   - status: OK
