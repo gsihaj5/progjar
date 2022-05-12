@@ -2,6 +2,7 @@ import socket
 import json
 import base64
 import logging
+import os
 
 server_address = ('0.0.0.0', 7777)
 
@@ -13,6 +14,9 @@ def send_command(command_str=""):
     logging.warning(f"connecting to {server_address}")
     try:
         logging.warning(f"sending message ")
+
+        command_str += "\r\n\r\n"
+
         sock.sendall(command_str.encode())
         # Look for the response, waiting until socket is done (no more data)
         data_received = ""  # empty string
@@ -66,18 +70,42 @@ def remote_get(filename=""):
         return False
 
 
-def remote_put(filename=""):
-    command_str = f"PUT {filename}"
+def remote_delete(filename=""):
+    command_str = f"DELETE {filename}"
     hasil = send_command(command_str)
+
     if (hasil['status'] == 'OK'):
+        print(hasil['data'])
         return True
-    else:
-        print("Gagal")
+
+    print(hasil['data'])
+    print("Gagal")
+    return False
+
+
+def remote_post(filename=""):
+    if not os.path.exists(filename):
+        print(f"Gagal: file{filename} tidak ditemukan")
         return False
+
+    fp = open(f"{filename}", 'rb')
+    filecontent = base64.b64encode(fp.read()).decode()
+
+    command_str = f"POST {filename} {filecontent}"
+    hasil = send_command(command_str)
+
+    if (hasil['status'] == 'OK'):
+        print(hasil['data'])
+        return True
+
+    print(hasil['data'])
+    print("Gagal")
+    return False
 
 
 if __name__ == '__main__':
     server_address = ('172.16.16.101', 6666)
-    # remote_list()
-    # remote_get('donalbebek.jpg')
-    remote_put('donalbebekcpy.jpg')
+    remote_list()
+    remote_get('donalbebek.jpg')
+    # remote_delete('donalbebekcpy.jpg')
+    remote_post('./city.jpg')

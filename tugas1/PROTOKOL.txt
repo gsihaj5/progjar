@@ -42,7 +42,7 @@ GET
 POST
 * TUJUAN: untuk upload file 
 * PARAMETER:
-  - PARAMETER1 : path file yang akan di upload
+  - PARAMETER1 : file yang di upload dalam bentuk base64
 * RESULT:
 - BERHASIL:
   - status: OK
@@ -50,7 +50,7 @@ POST
   - status: ERROR
   - data: pesan kesalahan
 
-PUT
+DELETE
 * TUJUAN: untuk delete file
 * PARAMETER:
   - PARAMETER1 : nama file yang ingin di delete
