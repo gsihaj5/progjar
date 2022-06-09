@@ -31,7 +31,7 @@ class FileInterface:
             if (filename == ''):
                 return None
             os.remove(f"{filename}")
-            return dict(status='OK')
+            return dict(status='OK', data='Data Berhasil di hapus')
         except Exception as e:
             return dict(status='ERROR', data=str(e))
 

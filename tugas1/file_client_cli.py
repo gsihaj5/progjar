@@ -75,7 +75,10 @@ def remote_delete(filename=""):
     hasil = send_command(command_str)
 
     if (hasil['status'] == 'OK'):
-        print(hasil['data'])
+        if('data' in hasil):
+            print(hasil['data'])
+        print("OK")
+
         return True
 
     print(hasil['data'])
@@ -105,7 +108,7 @@ def remote_post(filename=""):
 
 if __name__ == '__main__':
     server_address = ('172.16.16.101', 6666)
-    remote_list()
-    remote_get('donalbebek.jpg')
-    # remote_delete('donalbebekcpy.jpg')
-    remote_post('./city.jpg')
+    # remote_list()
+    # remote_get('donalbebek.jpg')
+    # remote_post('./city.jpg')
+    remote_delete('city.jpg')
