@@ -12,6 +12,9 @@ BEGIN {
 	if($1 == "Complete")
 		complete_requests=$3
 
+	if($1 == "Total" && $2 == "of")
+		complete_requests=$3
+
 	if($1 == "Failed" && $2 == "requests:")
 		failed_request=$3
 
